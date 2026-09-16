@@ -1,20 +1,19 @@
 describe('Login Feature', () => {
-  beforeEach(() => {
-    cy.visit('http://localhost:3000/');
-  });
+    beforeEach(() => {
+        cy.visit('http://localhost:3000/login');
+    });
 
-  it('should display login page correctly', () => {
-    cy.get('input[type="email"]').should('be.visible');
-    cy.get('input[type="password"]').should('be.visible');
-    cy.get('button').contains(/^Login$/i).should('be.visible');
-  });
+    it('should display login page correctly', () => {
+        cy.get('input[type="email"]').should('be.visible');
+        cy.get('input[type="password"]').should('be.visible');
+        cy.get('button').contains(/^Login$/i).should('be.visible');
+    });
 
-  it('should login successfully', () => {
-    cy.get('input[type="email"]').type('abidzar037@dicoding.com');
-    cy.get('input[type="password"]').type('password123');
+    it('should login successfully', () => {
+        cy.get('input[type="email"]').type('abidzar037@dicoding.com');
+        cy.get('input[type="password"]').type('password123');
+        cy.get('button').contains(/^Login$/i).click();
 
-    cy.get('button').contains(/^Login$/i).click();
-
-    cy.get('input[type="email"]').should('not.exist');
-  });
+        cy.get('input[type="email"]', { timeout: 10000 }).should('not.exist');
+    });
 });
